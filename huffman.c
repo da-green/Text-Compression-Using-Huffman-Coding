@@ -1,14 +1,13 @@
-// Huffman code example
-// compresses texts through efficient mem use of frequent characters
+/*
+*@Author: Daniel Green
+*Date: 5/21/26
+*Concept: Huffman Coding
+*Complexity: O(n+klogk) using heaps where k=27
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
-// basically, I count the frequencies of each character, a-z, treating any other character as ' '
-// and store each character indexed 0-27 (27 being ' ') in freq[]
-
-
 
 typedef struct {
     int freq[27];    // a-z + ' '
@@ -51,6 +50,8 @@ MinHeap* initHeap(int capacity) {
     return heap;
 }
 
+// Counts the frequencies of each character, a-z, treating any other character as ' '
+// and store each character indexed 0-27 (27 being ' ') in freq[]
 void char_freq(CharMap *map, char text[]) {
     for (int i=0; text[i] != '\0'; i++) {
         if (isalpha(text[i]))
@@ -60,6 +61,7 @@ void char_freq(CharMap *map, char text[]) {
     }
 }
 
+// helper to search frequency of character
 int search_freq(CharMap *map, char target) {
     return map->freq[target-'a'];
 }
@@ -188,6 +190,7 @@ void freeTree(Node *root) {
     free(root);
 }
 
+// generates bit sequence in table[][]
 void generateCodes(Node *root, char code[], int depth, char table[27][64]) {
     if (root == NULL)
         return;
@@ -245,6 +248,7 @@ void flushBits(BitWriter *bw) {
     }
 }
 
+// converts text to bit sequence
 void encode(char *text, char table[27][64], FILE *out) {
     int len = strlen(text);
     fwrite(&len, sizeof(int), 1, out);
@@ -273,6 +277,7 @@ void encode(char *text, char table[27][64], FILE *out) {
 
 // READING FILE
 //+========================================================================
+// converts bit sequence to plaintext
 void decode(Node *root, FILE *in) {
     int originalLen;
     fread(&originalLen, sizeof(int), 1, in);
