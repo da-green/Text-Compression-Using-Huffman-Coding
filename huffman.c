@@ -111,9 +111,8 @@ void insert(MinHeap *heap, Node *node) {
 
     heap->data[heap->size] = node;
 
-    percolateUp(heap, heap->size);
-
     heap->size++;
+    percolateUp(heap, heap->size-1);
 }
 
 Node* removeMin(MinHeap *heap) {
@@ -195,6 +194,10 @@ void generateCodes(Node *root, char code[], int depth, char table[27][64]) {
 
     // leaf node
     if (root->left == NULL && root->right == NULL) {
+        if (depth == 0) {
+            code[0] = '0';
+            depth = 1;
+        }
 
         code[depth] = '\0';
         int index = root->letter == ' ' ? 26 : root->letter - 'a';
@@ -243,6 +246,8 @@ void flushBits(BitWriter *bw) {
 }
 
 void encode(char *text, char table[27][64], FILE *out) {
+    int len = strlen(text);
+    fwrite(&len, sizeof(int), 1, out);
 
     BitWriter bw = {out, 0, 0};
 
@@ -269,20 +274,37 @@ void encode(char *text, char table[27][64], FILE *out) {
 // READING FILE
 //+========================================================================
 void decode(Node *root, FILE *in) {
+    int originalLen;
+    fread(&originalLen, sizeof(int), 1, in);
+
+    // tree contains only one character
+    if (root->left == NULL && root->right == NULL) {
+
+        for (int i = 0; i < originalLen; i++)
+            putchar(root->letter);
+
+        printf("\n");
+        return;
+    }
 
     Node *cur = root;
     int byte;
+    int decoded = 0;
 
-    while ((byte = fgetc(in)) != EOF) {
+    while ((byte = fgetc(in)) != EOF && decoded < originalLen) {
 
-        for (int i = 7; i >= 0; i--) {
+        for (int i = 7; i >= 0 && decoded < originalLen; i--) {
 
             int bit = (byte >> i) & 1;
 
             cur = bit ? cur->right : cur->left;
 
             if (!cur->left && !cur->right) {
+
                 putchar(cur->letter);
+
+                decoded++;
+
                 cur = root;
             }
         }
