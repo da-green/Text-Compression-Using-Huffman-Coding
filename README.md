@@ -76,9 +76,7 @@ but does not represent a full general-purpose text compression system.
 
 ## Author
 
-Implemented by Daniel Green
-
-For learning data compression and low-level algorithm implementation.
+Implemented by Daniel Green for learning data compression and low-level algorithm implementation.
 
 ## References
 - Inspired by course materials and lecture content from **Prof. Arup Guha**
