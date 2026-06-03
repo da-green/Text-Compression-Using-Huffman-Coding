@@ -56,6 +56,33 @@ Overall: **O(n + k log k)**
 
 ---
 
+## Character Handling (Simplified Model)
+
+This implementation is intentionally simplified for educational purposes.
+
+To reduce complexity and focus on the Huffman Coding algorithm itself, the input character set is restricted:
+
+- Only lowercase alphabetic characters (a–z) are preserved
+- All non-alphabetic characters (including punctuation, digits, and symbols) are converted to whitespace (`' '`)
+
+This means multiple different characters (e.g., `,`, `.`, `!`, digits) are treated as a single unified symbol during frequency counting and encoding.
+
+This design choice simplifies:
+- The frequency map
+- The Huffman tree construction
+- The overall encoding/decoding logic
+
+but does not represent a full general-purpose text compression system.
+
+## Author
+
+Implemented by Daniel Green
+For learning data compression and low-level algorithm implementation.
+
+## References
+- Inspired by course materials and lecture content from **Prof. Arup Guha**
+  - [Notes](https://www.cs.ucf.edu/~dmarino/ucf/cop3503/lectures/HuffmanCoding.pdf)
+
 ## File Output
 
 - `compressed.bin` → binary encoded output containing:
