@@ -77,6 +77,7 @@ but does not represent a full general-purpose text compression system.
 ## Author
 
 Implemented by Daniel Green
+
 For learning data compression and low-level algorithm implementation.
 
 ## References
