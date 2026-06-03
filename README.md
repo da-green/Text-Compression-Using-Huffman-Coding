@@ -74,13 +74,22 @@ This design choice simplifies:
 
 but does not represent a full general-purpose text compression system.
 
+---
+
 ## Author
 
 Implemented by Daniel Green for learning data compression and low-level algorithm implementation.
 
+---
+
 ## References
-- Inspired by course materials and lecture content from **Prof. Arup Guha**
-  - [Notes](https://www.cs.ucf.edu/~dmarino/ucf/cop3503/lectures/HuffmanCoding.pdf)
+
+- Based on concepts covered in coursework at the University of Central Florida (UCF)
+- Instruction and lecture material by **Prof. Arup Guha**
+  - [Course Notes](https://www.cs.ucf.edu/~dmarino/ucf/cop3503/lectures/HuffmanCoding.pdf)
+  - [Academic Page](https://www.cs.ucf.edu/~dmarino/ucf/index.html)
+
+---
 
 ## File Output
 
